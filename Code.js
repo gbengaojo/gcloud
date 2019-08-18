@@ -48,3 +48,54 @@ function buildAddOn(e) {
 
   return [card];
 }
+
+/**
+ * Updates the labels on the current thread based on
+ * user selections. Runs via the OnChangeAction for
+ * each CHECK_BOX created.
+ *
+ * @param {Object} e The data provided by the Gmail UI
+ */
+function toggleLabel(e) {
+  var selected - e.formInputs.labels;
+
+  // Activate temporary Gmail add-on scopes
+  var accessToken - e.messageMetadata.accessToken;
+  GmailApp.setCurrentMessageAccessToken(accessToken);
+
+  var messageId = e.messageMetadata.accessToken;
+  var message = GmailApp.getMessageById(messageId);
+  var thread = message.getThread();
+
+  if (selected != null) {
+    for each (var label in GmailApp.getUserLabels()) {
+      if (selected.indexOf(label.getName()) != -1) {
+        thread.addLabel(label);
+      }
+      else {
+        thread.removeLabel(label);
+      }
+    }
+  }
+  else {
+    for each (var label in GmailApp.getUserLabels()) {
+      thread.removeLabel(label);
+    }
+  }
+}
+
+/**
+ * Converts a GmailLabel object to an array of strings.
+ * Used for easy sorting and to determine if a value exists.
+ *
+ * @param {labelsObjects} A GmailLabel object array.
+ * @return {labels[]} An array of labels names as strings
+ */
+function getLabelArray(labelsObjects) {
+  var labels = [];
+  for (var i = 0; i < labelsObjects.length; i++) {
+    labels[i] = labelsObjects[i].getName();
+  }
+  labels.sort();
+  return labels;
+}
