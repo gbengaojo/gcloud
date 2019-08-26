@@ -5,8 +5,8 @@
     "https://www.googleapis.com/auth/gmail.modify"
   ],
   "gmail": {
-    "name": "Gmail Add-on Quickstart - QuickLables",
-    "logoUrl": "https://www.gstatic.com/images/icons/material/system/1x/label_googblue_24.dp.png",
+    "name": "Gmail Add-on Quickstart - QuickLabels",
+    "logoUrl": "https://www.gstatic.com/images/icons/material/system/1x/label_googblue_24dp.png",
     "contextualTriggers": [{
       "unconditional": {
       },
